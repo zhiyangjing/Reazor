@@ -2,20 +2,24 @@
 import router from '@/router/index'
 import { computed, createApp, reactive,ref } from 'vue';
 import { watch } from 'vue'
+
 const input1 = ref('')
 const input2 = ref('')
-const canclick = ref(false)
+const input3 = ref('')
+const same = ref(false)
 
-watch([()=>input1,input2],()=>{
-  if (input1.value != "" && input2.value != ""){
-    canclick.value = true
-  }else{
-    canclick.value = false
-}
-})
 function toSomewhere(url: string) {
   router.push(url)
 }
+
+watch([()=>input2,input3],()=> {
+  if (input2.value != input3.value){
+    same.value = true
+  }
+  else {
+    same.value = false
+  }
+})
 
 </script>
 
@@ -23,7 +27,7 @@ function toSomewhere(url: string) {
   <main>
     <body>
       <div class="container">
-        <div class="title">登录Reazor</div>
+        <div class="title">注册Reazor</div>
         <div class="enter">用户名
           <el-input  
           style="height: 40px;
@@ -34,7 +38,7 @@ function toSomewhere(url: string) {
           v-model="input1" 
           placeholder="请输入用户名" 
           clearable autofocus="true"/>
-          密码
+          请输入密码
           <el-input
             v-model="input2"
             style="height: 40px;
@@ -43,17 +47,23 @@ function toSomewhere(url: string) {
             placeholder="请输入密码"
             show-password
            />
+           <div>请确认密码
+           <div id="wrong" v-if="same">(两次输入不一致)</div></div>
+           <el-input
+            v-model="input3"
+            style="height: 40px;
+            font-size:20px;"
+            type="password"
+            placeholder="请确认密码"
+            show-password
+           />
           <el-button 
            style="height:40px;font-size: 17px;"
-           type="primary" v-if="canclick" plain>登录</el-button>
-          <el-button 
-           style="height:40px;font-size: 17px;"
-           type="primary" v-else plain disabled>请输入用户名和密码</el-button>
-          <div style="text-align: center;">
-            <RouterLink to="/signup" id="jump">
-            没有账号？注册一个
-            </RouterLink>
-          </div>
+           type="primary" 
+           plain>确定</el-button>
+          <RouterLink to="/login" id="jump">
+          返回登录
+          </RouterLink>
         </div>
       </div>
 
@@ -94,12 +104,18 @@ body {
   font-size: 25px;
 }
 #jump {
-  font-size: 17px;
+  font-size: 15px;
   color:#409EFF;
   text-decoration: none;
   transition-duration: 0.2s;
+  text-align: center;
 }
 #jump:hover {
   color:#034486;
+}
+#wrong {
+  color:red;
+  font-size:17px;
+  display: inline-block;
 }
 </style>
