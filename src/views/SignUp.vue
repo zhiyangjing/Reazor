@@ -27,7 +27,10 @@ watch([()=>input2,input3],()=> {
   <main>
     <body>
       <div class="container">
-        <div class="title">注册Reazor</div>
+          <div class="title">
+          <img src="../asset/icons/Book.svg" id="icon"/>
+            注册Reazor
+          </div>
         <div class="enter">用户名
           <el-input  
           style="height: 40px;
@@ -93,6 +96,10 @@ body {
 .title {
   font-size: 40px;
   color:#409EFF;
+  display: flex;
+}
+#icon {
+  height:50px;
 }
 .enter {
   height:420px;
