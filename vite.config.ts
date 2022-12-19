@@ -14,7 +14,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      'api': {
+      '/api': {
+        // target:"https://fe2kao.tiaozhan.com/",
         target:"https://fe2kao.tiaozhan.com/",
         changeOrigin:true,
         secure:false
