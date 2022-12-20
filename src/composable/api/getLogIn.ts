@@ -14,11 +14,11 @@ import request from "./useRequests";
 //     console.log(res)
 //   })
 // }
-export function login() {
+export function login(input1:string,input2:string) {
   try{
     console.log(request.post('/user',{
-      "name":"someone",
-      "password":"1234",
+      "name":input1,
+      "password":input2,
     }))
     console.log("成功登录")
   }catch(e){

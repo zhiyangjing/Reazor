@@ -24,7 +24,7 @@ axios({
   <h1>REAZOR</h1>
   <h2 @click="toSomewhere('/playground')">Playground</h2>
   <h2 @click="toSomewhere('/login')">LogIn</h2>
-  <h2 @click="toSomewhere('/signup')">SignIn</h2>
+  <h2 @click="toSomewhere('/signup')">SignUp</h2>
   <h2 @click="toSomewhere('/read')">Read</h2>
 </template>
 

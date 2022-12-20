@@ -5,7 +5,7 @@ import axios from "axios";
 
 const request = axios.create({
   baseURL:"/api",
-  timeout:1000,
+  timeout:10000,
 //   timeourequestgetp// Passlist// // // 
 })
 

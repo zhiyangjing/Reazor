@@ -15,7 +15,7 @@
 <style scoped>
 .top {
   margin:0 0 0 0;
-  height:50px;
+  height:40px;
   width:100%;
   border-bottom: 1px;
   border-color: #e9f4ff;
@@ -28,14 +28,14 @@
   box-shadow: 0px 5px 10px rgb(207, 217, 232);
 }
 #logo {
-  height:45px;
+  height:40px;
 }
 #leftpart {
   display: flex;
   flex-direction: row;
   color:#409EFF;
   align-items: center;
-  font-size: 50px;
+  font-size: 40px;
 }
 #rightpart {
   display:flex;
@@ -44,6 +44,6 @@
   margin:auto;
   margin-right:0px;
   color:#409EFF;
-  font-size: 30px;
+  font-size: 25px;
 }
 </style>

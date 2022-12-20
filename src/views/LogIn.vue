@@ -2,6 +2,8 @@
 import router from '@/router/index'
 import { computed, createApp, reactive,ref } from 'vue';
 import { watch } from 'vue'
+import { login } from '@/composable/api/getLogIn'
+
 const input1 = ref('')
 const input2 = ref('')
 const canclick = ref(false)
@@ -15,6 +17,9 @@ watch([()=>input1,input2],()=>{
 })
 function toSomewhere(url: string) {
   router.push(url)
+}
+function getlogin(){
+  login(input1.value,input2.value)
 }
 
 </script>
@@ -47,8 +52,9 @@ function toSomewhere(url: string) {
             show-password
            />
           <el-button 
+          @click="getlogin"
            style="height:40px;font-size: 17px;"
-           type="primary" v-if="canclick" plain>登录</el-button>
+           type="primary" v-if="canclick" plain >登录</el-button>
           <el-button 
            style="height:40px;font-size: 17px;"
            type="primary" v-else plain disabled>请输入用户名和密码</el-button>

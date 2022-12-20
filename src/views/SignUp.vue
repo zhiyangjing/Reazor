@@ -2,6 +2,8 @@
 import router from '@/router/index'
 import { computed, createApp, reactive,ref } from 'vue';
 import { watch } from 'vue'
+import { getSignUp } from '@/composable/api/useSignUp';
+
 
 const input1 = ref('')
 const input2 = ref('')
@@ -10,6 +12,10 @@ const same = ref(false)
 
 function toSomewhere(url: string) {
   router.push(url)
+}
+
+function signup(){
+  getSignUp(input1.value,input2.value)
 }
 
 watch([()=>input2,input3],()=> {
@@ -63,7 +69,15 @@ watch([()=>input2,input3],()=> {
           <el-button 
            style="height:40px;font-size: 17px;"
            type="primary" 
-           plain>确定</el-button>
+           plain
+           disabled
+           v-if="same">输入不一致</el-button>
+          <el-button 
+           @click="signup"
+           style="height:40px;font-size: 17px;"
+           type="primary" 
+           plain
+           v-else>确定</el-button>
           <RouterLink to="/login" id="jump">
           返回登录
           </RouterLink>

@@ -4,10 +4,11 @@ import axios from 'axios'
 import { getPasslist } from '@/composable/api/useGetPassageList'
 import { ref } from 'vue'
 
-import { getSignIn } from '@/composable/api/useSignUp'
+import { getSignUp } from '@/composable/api/useSignUp'
 import { getState } from '@/composable/api/getState'
 import { login } from '@/composable/api/getLogIn'
 import { getPassage } from '@/composable/api/getPassage'
+//import { anyTypeAnnotation } from '@babel/types'
 const type = ref('')
 const page = ref(1)
 const limit = ref(1)
@@ -16,11 +17,11 @@ const name = ref('someone')
 const code = ref('1234')
 
 function getpass(){
-  getPassage()
+  getPassage(3)
 }
 
 function submit2() {
-  console.log(login())
+  console.log(login(name.value,code.value))
 }
 
 function submit() {
@@ -29,7 +30,7 @@ function submit() {
 
 
 function signup() {
-  getSignIn()
+  getSignUp("name","12")
 }
 
 function getinformation() {

@@ -13,15 +13,24 @@ import request from "./useRequests";
 //   })
 // }
 
-export function getPassage() {
+// export function getPassage() {
+//   request({
+//     url:'/passage/',
+//     method:'get',
+//     params:{
+//       "id":"3"
+//     }
+//   })
+//   .then((res)=>{
+//     console.log(res)
+//   })
+// }
+
+export function getPassage(id:number){
   request({
-    url:'/passage/:id',
-    method:'get',
-    params:{
-      id:3
-    }
-  })
-  .then((res)=>{
+    method:"get",
+    url:`/passage/${id}`
+  }).then((res)=>{
     console.log(res)
   })
 }

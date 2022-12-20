@@ -2,10 +2,10 @@ import axios from "axios";
 import request from "./useRequests";
 
 
-export function getPasslist(){
+export function getPasslist(type:string,page:number|undefined,limit:number|undefined){
   request({
     method:"GET",
-    url:`/passagelist?type=ch&page=1&limit=2`
+    url:`/passagelist?type=${type}&page=${page}&limit=${limit}`
   }).then((res)=>{
     console.log(res)
   })
