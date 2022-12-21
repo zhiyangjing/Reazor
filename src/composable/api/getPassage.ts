@@ -26,12 +26,10 @@ import request from "./useRequests";
 //   })
 // }
 
-export function getPassage(id:number){
-  request({
+export function getPassage(id:number | undefined){
+  return request({
     method:"get",
     url:`/passage/${id}`
-  }).then((res)=>{
-    console.log(res)
   })
 }
 

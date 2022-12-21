@@ -10,10 +10,14 @@ const props = defineProps({
   limit:Number
 })
 
+const emit = defineEmits(["respose"])
+
 
 function getpassagelist(){
   console.log(value.value,props.page,props.limit)
-  getPasslist(value.value,props.page,props.limit)
+  const data = getPasslist(value.value,props.page,props.limit)
+  console.log(data)
+  emit('respose',data)
 }
 const options = [
         {

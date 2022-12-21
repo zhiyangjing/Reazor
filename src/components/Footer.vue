@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
+import { getPasslist } from '@/composable/api/useGetPassageList';
+
 
 const total = ref(100)
 const currentPage4 = ref(4)
@@ -8,6 +10,13 @@ const pageSize4 = ref(10)
 const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
+
+
+// const props = defineProps({
+//   type:String,
+// })
+
+
 
 const handleSizeChange = (val: number) => {
   console.log(`${val} items per page`)

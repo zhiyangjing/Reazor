@@ -3,11 +3,9 @@ import request from "./useRequests";
 
 
 export function getPasslist(type:string,page:number|undefined,limit:number|undefined){
-  request({
+  return request({
     method:"GET",
     url:`/passagelist?type=${type}&page=${page}&limit=${limit}`
-  }).then((res)=>{
-    console.log(res)
   })
 }
 
