@@ -28,6 +28,7 @@ function chosenpass(){
   color:grey;
 }
 #name {
+  cursor: pointer;
   height:20px;
   font-size: 17px;
   display: flex;

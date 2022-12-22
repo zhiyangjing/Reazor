@@ -19,6 +19,10 @@ const data = ref({
 const emit = defineEmits(["response"])
 const state = ref(true)
 
+const para = ref(-1)
+const index = ref(0)
+const i = ref("")
+
 function goread(){
   emit('response',state.value)
 }
@@ -29,7 +33,10 @@ async function show(){
   console.log(res)
 }
 
-onMounted(show)
+onMounted(()=>{
+  para.value=0
+  show()
+})
 </script>
 
 
@@ -41,7 +48,7 @@ onMounted(show)
     <Paragraph>
       <template v-slot:title>{{ data.title }}</template>
     </Paragraph>
-    <Paragraph v-for="i in data.content">
+    <Paragraph v-for="(i,index) in data.content" :paragraph="index">
       {{ i }}
     </Paragraph>
   </div>
@@ -66,6 +73,7 @@ onMounted(show)
   padding-top: 15px;
 }
 #goback {
+  cursor: pointer;
   color:#409EFF;
   margin-left:50px;
   margin-top:25px;

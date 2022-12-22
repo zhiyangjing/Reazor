@@ -12,7 +12,7 @@ import request from "./useRequests";
 
 export function getState() {
   try{
-    console.log(request.get('/user/state'))
+    return request.get('/user/state')
     console.log("成功获取信息")
   }catch(e){
     alert(e)

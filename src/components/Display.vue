@@ -32,11 +32,17 @@ const emit = defineEmits(["response"])
 //   console.log("clicked")
 //   console.log(id)
 // }
-const id = ref(Number)
-watch(id,()=>{
-  console.log(id.value)
-  emit('response',id.value)
-})
+
+// const id = ref(Number)
+
+function gotopass(a:number){
+  console.log(a)
+  emit('response',a)
+}
+// watch(id,()=>{
+//   console.log(id.value)
+//   emit('response',id.value)
+// })
 
 
 </script>
@@ -52,7 +58,7 @@ watch(id,()=>{
         <!-- <button @click="show" >展示promise</button> -->
       </template>
     </Passname>
-    <Passname v-for="i in data.passages" :id="i.id" @response="(msg)=>id = msg">{{ i.title }}</Passname>
+    <Passname v-for="i in data.passages" :id="i.id" @response="(msg)=>gotopass(msg)">{{ i.title }}</Passname>
   </div>
 </template>
 

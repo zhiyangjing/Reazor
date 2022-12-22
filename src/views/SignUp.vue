@@ -103,9 +103,7 @@ body {
   flex-direction: column;;
   justify-content: space-evenly;
   align-items: center;
-  border:2px solid #409EFF;
-  border-radius:30px;
-  background-color: rgb(230, 240, 249);
+  box-shadow: 0px 5px 10px rgb(207, 217, 232);
 }
 .title {
   font-size: 40px;

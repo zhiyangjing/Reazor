@@ -14,7 +14,7 @@ const limit = ref(4)
 
 const data = ref(Promise)
 
-const readingid = ref(Number)
+const readingid = ref(2)
 
 watch(data,()=>{
   console.log("from watch")
@@ -22,22 +22,27 @@ watch(data,()=>{
 })
 
 const notreading = ref(true)
-watch(readingid,()=>{
+
+function startread(a:number){
   notreading.value = false
-})
+  readingid.value = a
+}
+// watch(readingid,()=>{
+//   notreading.value = false
+// })
 </script>
 <template>
   <body>
     <Header>
     </Header>
     
-    <Search id="search" :page="page" :limit="limit" @respose="(msg)=> data = msg" v-if="notreading">
+    <Search id="search" :page="page" :limit="limit" @respose="(msg)=> data = msg" v-show="notreading">
     </Search>
 
-    <Display id="display" :data="data" v-if="notreading" @response="(msg)=>readingid=msg">
+    <Display id="display" :data="data" v-show="notreading" @response="(msg)=>startread(msg)">
 
     </Display>
-    <Footer id="footer" v-if="notreading">
+    <Footer id="footer" v-show="notreading">
 
     </Footer>
     <ShowPassage v-if="!notreading" id="reading" :passageid="readingid" @response="(msg)=>notreading = msg">

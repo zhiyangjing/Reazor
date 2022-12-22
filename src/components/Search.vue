@@ -2,7 +2,7 @@
 
 import { ref } from 'vue'
 import { getPasslist } from '@/composable/api/useGetPassageList'
-import { dataType } from 'element-plus/es/components/table-v2/src/common';
+import { onMounted } from 'vue';
 
 const value = ref('')
 const props = defineProps({
@@ -19,6 +19,9 @@ function getpassagelist(){
   console.log(data)
   emit('respose',data)
 }
+
+onMounted(getpassagelist)
+
 const options = [
         {
           value: 'en',
