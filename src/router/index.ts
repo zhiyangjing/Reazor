@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import { getState } from '@/composable/api/getState'
+import { ref } from 'vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      redirect:'/login'
     },
     {
       path: '/playground',
@@ -31,8 +32,38 @@ const router = createRouter({
       path: '/read',
       name: 'read',
       component: () => import('../views/Read.vue')
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: ()=> import('../views/NotFound.vue')
+    },
+    {
+     path: '/:pathMatch(.*)*',
+      redirect: '/404'
     }
   ]
+})
+
+const havelogin = ref(false)
+try{
+  const res = await getState()
+  console.log("已有账号登录")
+  console.log(res)
+  havelogin.value = true
+}catch(e){
+  
+}
+router.beforeEach(async (to, from) => {
+  if (
+    // 检查用户是否已登录
+    !havelogin.value &&
+    // ❗️ 避免无限重定向
+    to.name == 'read'
+  ) {
+    // 将用户重定向到登录页面
+    return { name: 'login' }
+  }
 })
 
 export default router

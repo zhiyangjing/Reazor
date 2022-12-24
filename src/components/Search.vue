@@ -3,6 +3,7 @@
 import { ref } from 'vue'
 import { getPasslist } from '@/composable/api/useGetPassageList'
 import { onMounted } from 'vue';
+import { watch } from 'vue'
 
 const value = ref('')
 const props = defineProps({
@@ -21,6 +22,9 @@ function getpassagelist(){
 }
 
 onMounted(getpassagelist)
+watch(props,()=>{
+  getpassagelist()
+})
 
 const options = [
         {

@@ -19,9 +19,6 @@ const data = ref({
 const emit = defineEmits(["response"])
 const state = ref(true)
 
-const para = ref(-1)
-const index = ref(0)
-const i = ref("")
 
 function goread(){
   emit('response',state.value)
@@ -30,13 +27,16 @@ function goread(){
 async function show(){
   const res = await getPassage(props.passageid)
   data.value = res
-  console.log(res)
+  // console.log(res)
 }
 
 onMounted(()=>{
-  para.value=0
   show()
 })
+
+
+
+
 </script>
 
 
@@ -48,7 +48,7 @@ onMounted(()=>{
     <Paragraph>
       <template v-slot:title>{{ data.title }}</template>
     </Paragraph>
-    <Paragraph v-for="(i,index) in data.content" :paragraph="index">
+    <Paragraph v-for="(i,index) in data.content" :paragraph="index" :passid="passageid" :comments="data.comments" @refresh="show(),show()">
       {{ i }}
     </Paragraph>
   </div>

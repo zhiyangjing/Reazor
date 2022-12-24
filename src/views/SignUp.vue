@@ -4,6 +4,8 @@ import { computed, createApp, reactive,ref } from 'vue';
 import { watch } from 'vue'
 import { getSignUp } from '@/composable/api/useSignUp';
 
+import { ElMessage } from 'element-plus'
+import { getState } from '@/composable/api/getState';
 
 const input1 = ref('')
 const input2 = ref('')
@@ -14,8 +16,40 @@ function toSomewhere(url: string) {
   router.push(url)
 }
 
-function signup(){
-  getSignUp(input1.value,input2.value)
+async function signup(){
+  try{
+    const res = await getState()
+    ElMessage({
+      message: '已有帐号登录',
+      type: 'warning',
+    })
+    toSomewhere('/')
+    toSomewhere('/read')
+    console.log("已有账号登录，请退出")
+    console.log(res)
+    setTimeout(() => {
+      location.reload()
+    }, 200);
+  }catch(e){
+    try{
+      const isthesame = await getSignUp(input1.value,input2.value)
+      ElMessage({
+        message: '已成功注册',
+        type: 'success',
+      })
+      toSomewhere('/')
+      toSomewhere('/read')
+      setTimeout(() => {
+        location.reload()
+      }, 200);
+      console.log("成功注册")
+    }catch{
+      ElMessage({
+        message: '用户名已存在',
+        type: 'warning',
+      })
+    }
+  }
 }
 
 watch([()=>input2,input3],()=> {

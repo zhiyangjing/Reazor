@@ -16,11 +16,10 @@ import request from "./useRequests";
 // }
 export function login(input1:string,input2:string) {
   try{
-    console.log(request.post('/user',{
+    return request.post('/user',{
       "name":input1,
       "password":input2,
-    }))
-    console.log("成功登录")
+    })
   }catch(e){
     alert(e)
   }

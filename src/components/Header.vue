@@ -5,7 +5,9 @@ import { getState } from '@/composable/api/getState';
 import { onMounted } from 'vue';
 import { watch } from 'vue'
 import { getChange } from '@/composable/api/getChange'
-
+import { logout } from '@/composable/api/getLogout';
+import router from '@/router/index';
+import { ElMessage } from 'element-plus'
 
 const dialogFormVisible = ref(false)
 
@@ -47,6 +49,19 @@ function changeinformation(){
   getChange(formLabelAlign.name,formLabelAlign.code1)
   information.value.name = formLabelAlign.name
 }
+
+// function toSomewhere(url: string) {
+//   router.push(url)
+// }
+
+function Logout(){
+  logout()
+  ElMessage({
+    message: '成功退出登录',
+    type: 'success',
+  })
+}
+
 </script>
 
 
@@ -67,8 +82,10 @@ function changeinformation(){
           <img style="height:35px;" src="../asset/icons/User.svg"/>
         </el-button>
       </div>
-      <div> 
-        <el-button type="primary" round>退出登录</el-button>
+      <div>
+        <RouterLink to="/login" style="text-decoration:none;"> 
+          <el-button type="primary" round @click="Logout">退出登录</el-button>
+        </RouterLink>
       </div>
     </div>
   </div>

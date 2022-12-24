@@ -3,10 +3,31 @@ import router from '@/router/index'
 import { computed, createApp, reactive,ref } from 'vue';
 import { watch } from 'vue'
 import { login } from '@/composable/api/getLogIn'
-
+import { getState } from '@/composable/api/getState';
+import { ElMessage } from 'element-plus'
 const input1 = ref('')
 const input2 = ref('')
 const canclick = ref(false)
+
+
+function toSomewhere(url: string) {
+  router.push(url)
+}
+
+
+const open1 = () => {
+  ElMessage('this is a message.')
+}
+const open2 = () => {
+  ElMessage({
+    message: 'Congrats, this is a success message.',
+    type: 'success',
+  })
+}
+
+const open4 = () => {
+  ElMessage.error('Oops, this is a error message.')
+}
 
 watch([()=>input1,input2],()=>{
   if (input1.value != "" && input2.value != ""){
@@ -15,11 +36,54 @@ watch([()=>input1,input2],()=>{
     canclick.value = false
 }
 })
-function toSomewhere(url: string) {
-  router.push(url)
-}
-function getlogin(){
-  login(input1.value,input2.value)
+
+async function getlogin(){
+  console.log(3)
+  const canlogin = ref(true)
+  try{
+    const res = await getState()
+    toSomewhere('/')
+    toSomewhere('/read')
+    
+    console.log("已有账号登录")
+    console.log(res)
+    canlogin.value = false
+    setTimeout(() => {
+      // location.reload()
+      ElMessage({
+        message: '已有帐号登录',
+        type: 'warning',
+      })
+      location.reload()
+    }, 200);
+    
+    
+  }catch(e){
+    
+  }
+  console.log(4)
+  console.log(canlogin.value)
+  if (canlogin.value){
+    console.log("try to getlogin")
+    try{
+      const res2 = await login(input1.value,input2.value)
+      toSomewhere('/')
+      toSomewhere('/read')
+      setTimeout(() => {
+        location.reload()
+        console.log("成功登录")
+        ElMessage({
+          message: '登录成功',
+          type: 'success',
+        })
+      }, 500);
+    }catch(e){
+      ElMessage({
+        message: '账号或密码错误',
+        type: 'error',
+      })
+    }
+  }
 }
 
 </script>
@@ -54,7 +118,7 @@ function getlogin(){
           <el-button 
           @click="getlogin"
            style="height:40px;font-size: 17px;"
-           type="primary" v-if="canclick" plain >登录</el-button>
+           type="primary" v-if="canclick" plain>登录</el-button>
           <el-button 
            style="height:40px;font-size: 17px;"
            type="primary" v-else plain disabled>请输入用户名和密码</el-button>

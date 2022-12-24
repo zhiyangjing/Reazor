@@ -2,21 +2,45 @@
 
 import { ref } from 'vue'
 import { getPasslist } from '@/composable/api/useGetPassageList';
+import { onMounted } from 'vue';
+import { watch } from 'vue'
+import { emitChangeFn } from 'element-plus';
+
+const props = defineProps({
+  data:Promise
+})
+
+const data = ref({
+  total:Number
+} as any)
+
+async function show(){
+  console.log("from footer")
+  const res = await props.data
+  data.value = res
+  // total.value = data.total
+  total.value = data.value.total
+}
+
+watch(props,()=>{
+  show()
+})
 
 
-const total = ref(100)
-const currentPage4 = ref(4)
-const pageSize4 = ref(10)
-const small = ref(false)
-const background = ref(false)
+const currentPage4 = ref(1)
+const pageSize4 = ref(4)
 const disabled = ref(false)
+const total = ref(4)
 
 
 // const props = defineProps({
 //   type:String,
 // })
-
-
+const emit = defineEmits(['response'])
+function change(){
+  console.log("changing")
+  emit('response',[currentPage4,pageSize4])
+}
 
 const handleSizeChange = (val: number) => {
   console.log(`${val} items per page`)
@@ -33,14 +57,12 @@ const handleCurrentChange = (val: number) => {
     <el-pagination
       v-model:current-page="currentPage4"
       v-model:page-size="pageSize4"
-      :page-sizes="[5,10,15,20]"
-      :small="small"
+      :page-sizes="[2,4,6,8]"
       :disabled="disabled"
-      :background="background"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
+      @size-change="change"
+      @current-change="change"
     />
   </div>
   </div>

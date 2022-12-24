@@ -9,6 +9,7 @@ import Display from '@/components/Display.vue';
 import Footer from '@/components/Footer.vue';
 import ShowPassage from '@/components/ShowPassage.vue';
 
+const pages = ref([])
 const page = ref(1)
 const limit = ref(4)
 
@@ -20,7 +21,10 @@ watch(data,()=>{
   console.log("from watch")
   console.log(data.value)
 })
-
+watch(pages,()=>{
+  page.value = pages.value[0].value
+  limit.value = pages.value[1].value
+})
 const notreading = ref(true)
 
 function startread(a:number){
@@ -42,7 +46,7 @@ function startread(a:number){
     <Display id="display" :data="data" v-show="notreading" @response="(msg)=>startread(msg)">
 
     </Display>
-    <Footer id="footer" v-show="notreading">
+    <Footer id="footer" :data="data" v-show="notreading" @response="(msg)=>pages=msg">
 
     </Footer>
     <ShowPassage v-if="!notreading" id="reading" :passageid="readingid" @response="(msg)=>notreading = msg">

@@ -26,7 +26,6 @@ axios({
   <h2 @click="toSomewhere('/login')">LogIn</h2>
   <h2 @click="toSomewhere('/signup')">SignUp</h2>
   <h2 @click="toSomewhere('/read')">Read</h2>
-  <h2 @click="toSomewhere('/readpassage')">Readpassage</h2>
 </template>
 
 <style scoped>
