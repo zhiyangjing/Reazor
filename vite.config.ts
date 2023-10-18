@@ -13,10 +13,17 @@ export default defineConfig({
     }
   },
   server: {
+    // proxy: {
+    //   '/api': {
+    //     // target:"https://fe2kao.tiaozhan.com/",
+    //     target:"https://fe2kao.tiaozhan.com/",
+    //     changeOrigin:true,
+    //     secure:false
+    //   }
+    // }
     proxy: {
-      '/api': {
-        // target:"https://fe2kao.tiaozhan.com/",
-        target:"https://fe2kao.tiaozhan.com/",
+      '/api':{
+        target:"http://localhost:",
         changeOrigin:true,
         secure:false
       }

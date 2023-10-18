@@ -46,24 +46,27 @@ const router = createRouter({
 })
 
 const havelogin = ref(false)
-try{
+async function test(){
   const res = await getState()
   console.log("已有账号登录")
   console.log(res)
+}
+try {
+  test()
   havelogin.value = true
 }catch(e){
   
 }
-router.beforeEach(async (to, from) => {
-  if (
-    // 检查用户是否已登录
-    !havelogin.value &&
-    // ❗️ 避免无限重定向
-    to.name == 'read'
-  ) {
-    // 将用户重定向到登录页面
-    return { name: 'login' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   if (
+//     // 检查用户是否已登录
+//     !havelogin.value &&
+//     // ❗️ 避免无限重定向
+//     to.name == 'read'
+//   ) {
+//     // 将用户重定向到登录页面
+//     return { name: 'login' }
+//   }
+// })
 
 export default router

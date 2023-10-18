@@ -87,7 +87,6 @@ function rTime(date:string) {
       input-style="width:600px;"
       type="textarea"
       placeholder="Please input"
-      
       />
     </div>
     <template #footer>
